@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Url shortener | Shorust</title>
+	<meta name="description" content="A url shortener made with rustlang.">
+	<meta name="author" content="Edgar Luque">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<style>
+	body {
+		font-family: monospace;
+	}
+	</style>
+</head>
+
+<h1>Shorust</h1>
+<h2>Url shortener</h2>
+<p>Source: <a href="https://github.com/edg-l/shorust">https://github.com/edg-l/shorust</a></p>
+
+<p>Use this form:</p>
+
+<form method="POST" action="">
+	<label for="url">Url:</label>
+	<input id="url" name="url" type="url">
+	<button type="submit">Create shortened url</button>
+</form>
+
+<p>Or use the terminal.</p>
+<pre><code>curl -X POST http://localhost:3000/ -d"url=https://twitter.com/home"</code></pre>
+
+</html>
