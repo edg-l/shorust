@@ -114,10 +114,11 @@ async fn main() -> std::io::Result<()> {
             .service(
                 web::resource("/")
                     .route(web::post().to(add_url))
-                    .route(web::get().to(|| {
+                    .route(web::get().to(|root_url: web::Data<RootUrl>| {
+                        let index_content = include_str!("index.html").replace("~~baseurl~~", &root_url.url);
                         HttpResponse::Ok()
                             .content_type("text/html")
-                            .body(include_str!("index.html"))
+                            .body(&index_content)
                     })),
             )
     })

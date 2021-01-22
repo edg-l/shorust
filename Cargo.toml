@@ -1,6 +1,6 @@
 [package]
 name = "shorust"
-version = "1.0.1"
+version = "1.0.2"
 description = "A simple url shortener server made in rust."
 readme = "README.md"
 repository = "https://github.com/edg-l/shorust"
