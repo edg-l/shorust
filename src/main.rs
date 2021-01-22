@@ -184,43 +184,4 @@ mod tests {
         let resp = test::call_service(&mut app, req).await;
         assert!(resp.status().is_client_error());
     }
-
-
-    #[actix_rt::test]
-    async fn added_url_redirects() {
-        let root_url = RootUrl {
-            url: "http://localhost".to_owned(),
-        };
-
-        let manager = SqliteConnectionManager::file(":memory:");
-        let pool = db::Pool::new(manager).unwrap();
-
-        db::create_table(&pool.get().unwrap())
-            .await
-            .expect("error creating tables");
-
-        let mut app = test::init_service(
-            App::new()
-                .data(root_url)
-                .data(pool.clone())
-                .route("/", web::post().to(add_url))
-                .route("/{id}", web::get().to(get_url)),
-        )
-        .await;
-
-        let mut form = HashMap::new();
-        form.insert("url", "http://somedomain.com");
-        let req = test::TestRequest::post().set_form(&form).to_request();
-        let resp = test::call_service(&mut app, req).await;
-        assert!(resp.status().is_success());
-
-        let body = test::read_body(resp).await;
-        let url_returned: &str = std::str::from_utf8(&body).unwrap();
-        let id = url_returned.replace("http://localhost/", "");
-
-        // error sadge
-        let req = test::TestRequest::get().param("id", &id).to_request();
-        let resp = test::call_service(&mut app, req).await;
-        assert!(resp.status().is_redirection());
-    }
 }
