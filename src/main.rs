@@ -25,6 +25,7 @@ async fn get_url(pool: web::Data<db::Pool>, web::Path(id): web::Path<String>) ->
     let res;
 
     if let Some(url) = url {
+        db::add_url_hit(&conn, &id).await?;
         res = HttpResponse::Found()
             .set_header(http::header::LOCATION, url)
             .finish();
