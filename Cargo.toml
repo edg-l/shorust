@@ -1,6 +1,12 @@
 [package]
 name = "shorust"
-version = "0.1.0"
+version = "1.0.0"
+description = "A simple url shortener server made in rust."
+readme = "README.md"
+repository = "https://github.com/edg-l/shorust"
+license = "MIT"
+keywords = ["url", "shortener", "short", "link", "server"]
+categories = ["web-programming::http-server", "web-programming"]
 authors = ["Edgar <git@edgarluque.com>"]
 edition = "2018"
 
